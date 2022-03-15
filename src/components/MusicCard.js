@@ -14,14 +14,14 @@ class MusicCard extends Component {
           Elemento não suportado pelo seu navegador
           <code>audio</code>
         </audio>
-        <label htmlFor="favorita">
+        <label htmlFor={ trackId }>
+          Favorita
           <input
-            id="favorita"
+            id={ trackId }
             type="checkbox"
             data-testid={ `checkbox-music-${trackId}` }
             onClick={ addFavoriteSong }
           />
-          Favorita
         </label>
       </div>
     );
