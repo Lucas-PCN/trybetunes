@@ -1,0 +1,47 @@
+.albumPage {
+  display: flex;
+  gap: 40px;
+  left: 180px;
+  padding-bottom: 200px;
+  position: absolute;
+  top: 310px;
+  width: 75%;
+}
+
+.album {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 450px;
+}
+
+.albumImg {
+  height: 400px;
+  object-fit: cover;
+  width: 400px;
+}
+
+.albumName {
+  color: #023031;
+  font-size: 36px;
+  font-weight: 700;
+  height: 36px;
+  margin-left: 10px;
+  width: 330px;
+}
+
+.artistName {
+  color: #023031;
+  font-size: 24px;
+  font-weight: 300;
+  height: 36px;
+  margin-left: 15px;
+  margin-top: 10px;
+  width: 255px;
+}
+
+.musicList {
+  display: flex;
+  flex-direction: column;
+  width: 850px;
+}

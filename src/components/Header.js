@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from '../Loading';
+import '../styles/Header.css';
+import logoHeader from '../images/logoHeader.svg';
+import profileSilhouette from '../images/profileSilhouette.svg';
 
 class Header extends React.Component {
   constructor() {
@@ -29,12 +32,49 @@ class Header extends React.Component {
     const { theUser, loading } = this.state;
     if (loading) return <Loading />;
     return (
-      <header data-testid="header-component">
-        <p data-testid="header-user-name">{ theUser.name }</p>
-        <Link to="/search" data-testid="link-to-search"> Pesquisa </Link>
-        <Link to="/favorites" data-testid="link-to-favorites"> Músicas favoritas </Link>
-        <Link to="/profile" data-testid="link-to-profile"> Perfil </Link>
-        header.
+      <header className="header" data-testid="header-component">
+        <section className="headerMainContainer">
+          <Link to="/">
+            <img className="logoMainContainer" src={ logoHeader } alt="Logo" />
+          </Link>
+          <Link to="/profile" className="mainContainerUser">
+            <img className="user-img" src={ profileSilhouette } alt="User silhouette" />
+            <p className="userName" data-testid="header-user-name">
+              { theUser.name }
+            </p>
+          </Link>
+        </section>
+        <section className="headerNavContainer">
+          <nav className="navNavContainer">
+            <NavLink
+              data-testid="link-to-search"
+              to="/search"
+              className={ (isActive) => (
+                isActive ? 'navLinkNavContainerActive' : 'navLinkNavContainer'
+              ) }
+            >
+              Search
+            </NavLink>
+            <NavLink
+              data-testid="link-to-favorites"
+              to="/favorites"
+              className={ (isActive) => (
+                isActive ? 'navLinkNavContainerActive' : 'navLinkNavContainer'
+              ) }
+            >
+              Favorites
+            </NavLink>
+            <NavLink
+              data-testid="link-to-profile"
+              to="/profile"
+              className={ (isActive) => (
+                isActive ? 'navLinkNavContainerActive' : 'navLinkNavContainer'
+              ) }
+            >
+              Profile
+            </NavLink>
+          </nav>
+        </section>
       </header>
     );
   }

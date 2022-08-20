@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from '../Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import '../styles/Search.css';
 
 class Search extends React.Component {
   constructor() {
@@ -61,7 +62,7 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <form htmlFor="search">
+        <form htmlFor="search" className="search">
           <input
             id="search"
             name="search"
@@ -69,40 +70,46 @@ class Search extends React.Component {
             data-testid="search-artist-input"
             value={ theSearch }
             onChange={ this.inputChange }
+            className="searchInput"
+            placeholder="Nome do artista"
           />
           <button
             type="button"
             data-testid="search-artist-button"
             disabled={ isButtonDisabled }
             onClick={ this.handleClick }
+            className="searchBtn"
           >
             Pesquisar
           </button>
         </form>
         {loading && <Loading />}
         {!loading && albums.length === 0
-        && <h2>Nenhum álbum foi encontrado</h2>}
+        && saveSearch !== ''
+          && <p className="albumNotFoundText">Nenhum álbum foi encontrado</p>}
         {!loading && albums.length !== 0 && (
-          <>
-            <h2>{`Resultado de álbuns de: ${saveSearch}`}</h2>
-            <ul>
+          <section className="results">
+            <p className="albumResultText">{`Resultado de álbuns de: ${saveSearch}`}</p>
+            <ul className="resultsAlbumList">
               {albums.map((album) => (
                 <li key={ album.collectionId }>
                   <Link
+                    className="albumListAlbum"
                     to={ `/album/${album.collectionId}` }
                     data-testid={ `link-to-album-${album.collectionId}` }
                   >
                     <img
+                      className="albumListAlbumImg"
                       src={ album.artworkUrl100 }
                       alt={ `${album.collectionName} - ${album.artistName}` }
                     />
-                    <h3>{ album.collectionName }</h3>
-                    <p>{ album.artistName }</p>
+                    <h3 className="albumListAlbumName">{ album.collectionName }</h3>
+                    <p className="albumListArtistName">{ album.artistName }</p>
                   </Link>
                 </li>
               ))}
             </ul>
-          </>
+          </section>
         )}
       </div>
     );

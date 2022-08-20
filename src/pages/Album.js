@@ -3,62 +3,79 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../Loading';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import '../styles/Album.css';
 
 class Album extends React.Component {
   constructor() {
     super();
+
     this.state = {
       arrayOfMusics: [],
       artist: '',
       albumName: '',
-      completeRequest: [],
+      image: '',
       loading: false,
+      favorites: [],
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.catchMusics();
+    this.getAllFavoriteSongs();
+  }
+
+  getAllFavoriteSongs = async () => {
     this.setState({ loading: true });
-    await getFavoriteSongs();
+    const favoriteSongs = await getFavoriteSongs();
     this.setState({
       loading: false,
+      favorites: [...favoriteSongs],
     });
   }
 
   catchMusics = async () => {
     const { match: { params: { id } } } = this.props;
+    this.setState({ loading: true });
     const request = await getMusics(id);
     const musics = request.slice(1);
     this.setState({
       arrayOfMusics: musics,
       artist: request[0].artistName,
       albumName: request[0].collectionName,
-      completeRequest: request,
+      image: request[0].artworkUrl100,
+      loading: false,
     });
   }
 
-  addFavoriteSong = async () => {
-    this.setState({ loading: true });
-    const { completeRequest } = this.state;
-    await addSong(completeRequest);
-    this.setState({ loading: false });
-  }
-
   render() {
-    const { arrayOfMusics, artist, albumName, loading } = this.state;
+    const { arrayOfMusics, artist, albumName, loading, image, favorites } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-        <h1 data-testid="artist-name">{ artist }</h1>
-        <h2 data-testid="album-name">{ albumName }</h2>
-        { (loading) && (<Loading />)}
-        {arrayOfMusics.map((music) => (<MusicCard
-          key={ music.trackId }
-          music={ music }
-          addFavoriteSong={ this.addFavoriteSong }
-        />))}
+        <section className="albumPage">
+          <section className="album">
+            <img
+              src={ image }
+              alt="Capa do álbum"
+              className="albumImg"
+            />
+            <div>
+              <p data-testid="album-name" className="albumName">{ albumName }</p>
+              <p data-testid="artist-name" className="artistName">{ artist }</p>
+            </div>
+          </section>
+          <section className="musicList">
+            { (loading) && (<Loading />)}
+            {arrayOfMusics.map((music) => (<MusicCard
+              key={ music.trackId }
+              music={ music }
+              favoriteList={ favorites }
+              albumName
+            />))}
+          </section>
+        </section>
       </div>
     );
   }
