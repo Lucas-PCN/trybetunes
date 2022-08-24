@@ -1,41 +1,14 @@
-:root {
-
-  --light-blue: rgb(1, 79, 124);
-
-  --dark-blue: rgb(1, 47, 107);
-
-  --light-gray: rgb(225, 229, 235);
-
-  --gray1: rgb(62, 66, 75);
-
-  --gray2: rgb(40, 42, 47);
-
-  --gray3: rgb(30, 31, 36);
-
-  --gray4: rgb(26, 27, 28);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.page-profile {
-  background-color: var(--light-gray);
-  min-height: 120vh;
-}
-
 .profile-sect {
-  background-color: var(--dark-blue);
-  border: 1px solid var(--dark-blue);
+  background-color: #023031;
+  border: 1px solid #023031;
   border-radius: 15px;
-  box-shadow: 0 0 30px var(--gray1);
-  color: var(--light-gray);
+  box-shadow: 0 0 30px rgb(62, 66, 75);
+  color: rgb(225, 229, 235);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin: 50px auto 0;
+  margin-bottom: 80px;
   max-width: 50%;
   min-height: 70vh;
   padding: 50px;
@@ -43,9 +16,10 @@
 }
 
 .img-sect {
-  border: 1px solid var(--dark-blue);
+  border: 1px solid #023031;
   border-radius: 15px;
   height: 200px;
+  margin-bottom: 30px;
   width: 200px;
 }
 
@@ -57,13 +31,13 @@
 }
 
 .link-edit {
-  color: var(--light-gray);
+  color: rgb(225, 229, 235);
   font-size: 1.3rem;
   text-decoration: none;
 }
 
 .link-edit:hover {
-  color: var(--light-blue);
+  color: rgb(15, 206, 110);
 }
 
 .profile-title {
