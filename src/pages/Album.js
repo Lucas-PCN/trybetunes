@@ -72,7 +72,7 @@ class Album extends React.Component {
               key={ music.trackId }
               music={ music }
               favoriteList={ favorites }
-              albumName
+              isComingFromAlbumPage
             />))}
           </section>
         </section>

@@ -8,6 +8,20 @@
   width: 75%;
 }
 
+.favoritePage {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.favT {
+  color: #023031;
+  display: flex;
+  font-size: 36px;
+  justify-content: center;
+  margin-top: 300px;
+}
+
 .album {
   display: flex;
   flex-direction: column;
@@ -43,5 +57,12 @@
 .musicList {
   display: flex;
   flex-direction: column;
-  width: 850px;
+  width: fit-content;
+}
+
+.musicCardFavorite {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  width: fit-content;
 }

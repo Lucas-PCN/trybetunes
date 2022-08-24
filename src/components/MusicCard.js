@@ -46,7 +46,8 @@ class MusicCard extends Component {
   };
 
   render() {
-    const { music: { trackName, previewUrl, trackId }, music } = this.props;
+    const { music: { trackName, previewUrl, trackId },
+      music, isComingFromAlbumPage } = this.props;
     const { loading, favSongs } = this.state;
     return (
       <div className="card">
@@ -66,8 +67,9 @@ class MusicCard extends Component {
             .
           </audio>
           {loading && <Loading />}
-          {!loading && (
+          {!loading && isComingFromAlbumPage && (
             <label htmlFor={ trackId }>
+              Favorita
               <input
                 id={ trackId }
                 type="checkbox"
@@ -89,6 +91,7 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string.isRequired,
     trackId: PropTypes.number.isRequired,
   }).isRequired,
+  isComingFromAlbumPage: PropTypes.bool.isRequired,
 };
 
 export default MusicCard;
